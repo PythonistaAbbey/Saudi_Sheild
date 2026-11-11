@@ -1,6 +1,8 @@
 // Offline support: cache pages and assets as they are visited, and pre-cache the core pages.
 const CACHE = 'ss-web-v1';
-const CORE = ['/', '/prepare/', '/plan/', '/check/', '/numbers/', '/drill/', '/about/', '/manifest.webmanifest', '/icon.svg'];
+// Paths are relative to the worker's scope so the site works at the domain root or under a sub-path.
+const BASE = new URL(self.registration.scope).pathname;
+const CORE = ['', 'prepare/', 'plan/', 'check/', 'numbers/', 'drill/', 'about/', 'manifest.webmanifest', 'icon.svg'].map((p) => BASE + p);
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
 });
@@ -21,7 +23,7 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match('/'))),
+        .catch(() => caches.match(req).then((r) => r || caches.match(BASE))),
     );
     return;
   }
