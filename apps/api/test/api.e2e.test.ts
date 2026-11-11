@@ -91,6 +91,13 @@ describe('end-to-end alert journey', () => {
     expect(verifyPublicAlert(item, key.publicKeyHex)).toBe(true);
   });
 
+  it('serves a compact signed lite feed for low-bandwidth clients', async () => {
+    const full = await request(http).get('/api/public/feed').expect(200);
+    const lite = await request(http).get('/api/public/feed/lite').expect(200);
+    expect(lite.body.e).toBe('EXERCISE');
+    expect(lite.text.length).toBeLessThan(full.text.length / 2);
+  });
+
   it('clears the alert with a referenced White message', async () => {
     const white = sign(msg('EX-E2E-2', { level: 'white', msgType: 'Update', references: ['EX-E2E-1'], instructions: ['RESUME_WITH_CAUTION'] }), DEMO_ISSUER_KEY);
     const w = (await request(http).post('/api/ingest').send(white).expect(201)).body;

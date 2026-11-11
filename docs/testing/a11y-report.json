@@ -1,0 +1,122 @@
+[
+  {
+    "label": "dashboard: sign-in",
+    "violations": [],
+    "passes": 19
+  },
+  {
+    "label": "dashboard: overview",
+    "violations": [],
+    "passes": 24
+  },
+  {
+    "label": "dashboard: inbound",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: alerts",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: areas",
+    "violations": [],
+    "passes": 24
+  },
+  {
+    "label": "dashboard: delivery",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: simulator",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: health",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: audit",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "dashboard: users",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "app (ar): onboarding",
+    "violations": [],
+    "passes": 17
+  },
+  {
+    "label": "app (ar): home with active alert",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (ar): التنبيهات",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (ar): الإرشادات",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (ar): العائلة",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (ar): المزيد",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "app (ar): alert detail",
+    "violations": [],
+    "passes": 19
+  },
+  {
+    "label": "app (en): onboarding",
+    "violations": [],
+    "passes": 18
+  },
+  {
+    "label": "app (en): home with active alert",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (en): Alerts",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (en): Guidance",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (en): Family",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "label": "app (en): More",
+    "violations": [],
+    "passes": 23
+  },
+  {
+    "label": "app (en): alert detail",
+    "violations": [],
+    "passes": 19
+  }
+]

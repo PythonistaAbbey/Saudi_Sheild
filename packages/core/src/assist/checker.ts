@@ -105,6 +105,11 @@ export function checkContent(msg: IssuerMessage, now: Date, opts: { hasPreviousA
   if (msg.level === 'white' && msg.msgType === 'Alert' && !opts.hasPreviousAlert) {
     out.push(f('ORPHAN_ALL_CLEAR', 'warning', 'All-clear with no earlier alert to clear.', 'رسالة انتهاء خطر دون تنبيه سابق.'));
   }
+  if (msg.instructions.length > 5) {
+    out.push(
+      f('TOO_MANY_STEPS', 'warning', 'More than five steps. People under stress act on the first few; consider shortening.', 'أكثر من خمس خطوات. يتصرف الناس تحت الضغط وفق الخطوات الأولى فقط؛ يُفضّل الاختصار.'),
+    );
+  }
   if (!msg.instructions.includes('FOLLOW_OFFICIAL_CHANNELS') && msg.level !== 'white') {
     out.push(
       f('NO_OFFICIAL_CHANNELS', 'info', 'Consider adding "Follow official channels".', 'يُقترح إضافة "تابع القنوات الرسمية".'),

@@ -59,14 +59,7 @@ function msg(
   };
 }
 
-const SHELTER: InstructionCode[] = [
-  'SHELTER_INTERIOR_ROOM',
-  'AVOID_WINDOWS',
-  'IF_OUTDOORS_SEEK_BUILDING',
-  'DRIVERS_PULL_OVER',
-  'DO_NOT_FILM_OR_GATHER',
-  'FOLLOW_OFFICIAL_CHANNELS',
-];
+const SHELTER: InstructionCode[] = ['SHELTER_INTERIOR_ROOM', 'AVOID_WINDOWS', 'IF_OUTDOORS_SEEK_BUILDING', 'DRIVERS_PULL_OVER', 'FOLLOW_OFFICIAL_CHANNELS'];
 
 export const SCENARIOS: Scenario[] = [
   {
@@ -103,7 +96,7 @@ export const SCENARIOS: Scenario[] = [
             msgType: 'Update',
             refs: ['1'],
             areas: ['EX-RIY-A', 'EX-RIY-B'],
-            instructions: [...SHELTER, 'STAY_INDOORS_UNTIL_CLEAR'],
+            instructions: SHELTER,
             note: { en: 'This is a scheduled exercise.', ar: 'هذا تمرين مجدول.' },
           }),
       },

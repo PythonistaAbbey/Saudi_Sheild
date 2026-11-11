@@ -276,6 +276,14 @@ export class PublicController {
     return this.svc.platform.publicFeed();
   }
 
+  /** Low-bandwidth feed: codes only, rendered on the device from approved templates. */
+  @Public()
+  @Get('feed/lite')
+  lite(@Res({ passthrough: true }) res: Response) {
+    res.setHeader('Cache-Control', 'no-store');
+    return this.svc.platform.liteFeed();
+  }
+
   @Public()
   @Get('key')
   key() {

@@ -2,6 +2,7 @@ import { AuditLog, verifyChain } from './audit';
 import { RuleBasedAssist, type AssistProvider } from './assist/provider';
 import { DEMO_ISSUER, DEMO_PUBLISHER_KEY, KeyRegistry, demoRegistry, sign, verifySignature, type KeyPair } from './crypto';
 import { areaByCode } from './geo';
+import { renderAll } from './templates';
 import type { Actor } from './rbac';
 import { envelopeForStep, scenarioById } from './scenarios';
 import type { AlertRecord, PublicAlert, PublicFeed, SignedEnvelope } from './types';
@@ -205,6 +206,16 @@ export class Platform {
     };
   }
 
+  /** Active alerts plus anything updated in the last 24 hours, codes only. */
+  liteFeed(): LiteFeed {
+    const cutoff = this.clock().getTime() - 24 * 3600_000;
+    const items = this.list()
+      .filter((r) => r.publishedAt)
+      .map((r) => this.toPublic(r))
+      .filter((a) => a.publicState === 'active' || new Date(a.updatedAt).getTime() >= cutoff);
+    return { g: this.clock().toISOString(), e: 'EXERCISE', k: this.publisherKey.keyId, alerts: items.map((a) => sign(toLite(a), this.publisherKey)) };
+  }
+
   publisherPublicKey() {
     return { keyId: this.publisherKey.keyId, publicKeyHex: this.publisherKey.publicKeyHex };
   }
@@ -262,4 +273,46 @@ export function verifyPublicAlert(env: SignedEnvelope<PublicAlert>, publisherPub
 
 export function areaNames(codes: string[], lang: 'ar' | 'en') {
   return codes.map((c) => areaByCode(c)?.name[lang] ?? c);
+}
+
+/* ------------------------- low-bandwidth "lite" feed ------------------------- */
+
+/**
+ * Compact alert for slow or expensive connections. It carries only codes; the
+ * app renders Arabic and English text locally from the same approved templates,
+ * so the wording is identical to the full feed. Signed like the full feed.
+ */
+export interface LiteAlert {
+  i: string; // id
+  n: string; // identifier
+  st: PublicAlert['status'];
+  l: PublicAlert['level'];
+  h: PublicAlert['hazard'];
+  a: string[];
+  s: PublicAlert['instructions'];
+  t: string; // issuedAt
+  u: string; // updatedAt
+  x: string; // expires
+  p: PublicAlert['publicState'];
+  r?: string[];
+}
+
+export function toLite(a: PublicAlert): LiteAlert {
+  return { i: a.id, n: a.identifier, st: a.status, l: a.level, h: a.hazard, a: a.areas, s: a.instructions, t: a.issuedAt, u: a.updatedAt, x: a.expires, p: a.publicState, r: a.references };
+}
+
+export function expandLite(l: LiteAlert): PublicAlert {
+  const msg = { identifier: l.n, sender: DEMO_ISSUER.id, sent: l.t, status: l.st, msgType: (l.r?.length ? 'Update' : 'Alert') as 'Update' | 'Alert', references: l.r, level: l.l, hazard: l.h, areas: l.a, instructions: l.s, expires: l.x };
+  return { id: l.i, identifier: l.n, status: l.st, issuer: DEMO_ISSUER, level: l.l, hazard: l.h, areas: l.a, instructions: l.s, texts: renderAll(msg), issuedAt: l.t, updatedAt: l.u, expires: l.x, publicState: l.p, references: l.r };
+}
+
+export interface LiteFeed {
+  g: string;
+  e: 'EXERCISE';
+  k: string; // publisher key id
+  alerts: SignedEnvelope<LiteAlert>[];
+}
+
+export function verifyLiteAlert(env: SignedEnvelope<LiteAlert>, publisherPublicKeyHex: string): boolean {
+  return env.payload.st === 'Exercise' && verifySignature(env, publisherPublicKeyHex);
 }

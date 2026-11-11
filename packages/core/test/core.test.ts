@@ -19,6 +19,8 @@ import {
   sign,
   verifyChain,
   verifyPublicAlert,
+  verifyLiteAlert,
+  expandLite,
   assertExerciseOnly,
   SafetyBoundaryError,
   checkIn,
@@ -381,5 +383,20 @@ describe('family check-ins', () => {
     expect(visibleStatus(fam.members.find((m) => m.id === 'me')!, new Date(now.getTime() + 73 * 3600_000))).toBe('no_update');
     fam = leave(fam, 'me');
     expect(fam.members.find((m) => m.id === 'me')).toBeUndefined();
+  });
+});
+
+describe('low-bandwidth feed', () => {
+  it('is much smaller, signed, and expands to the same wording as the full feed', () => {
+    const c = fixedClock();
+    const p = new Platform(c.now);
+    runToPublished(p);
+    const full = p.publicFeed();
+    const lite = p.liteFeed();
+    const key = p.publisherPublicKey().publicKeyHex;
+    expect(verifyLiteAlert(lite.alerts[0], key)).toBe(true);
+    expect(verifyLiteAlert({ ...lite.alerts[0], payload: { ...lite.alerts[0].payload, l: 'white' } }, key)).toBe(false);
+    expect(expandLite(lite.alerts[0].payload).texts).toEqual(full.alerts[0].payload.texts);
+    expect(JSON.stringify(lite).length).toBeLessThan(JSON.stringify(full).length / 2);
   });
 });

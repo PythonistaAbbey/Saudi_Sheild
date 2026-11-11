@@ -233,7 +233,8 @@ function Workspace({ id, session }: { id: string; session: Session }) {
                 <div className="stack">
                   <div className="notice ai small">
                     The assistant can only suggest wording. It cannot change the level, hazard, areas, instructions or timing, cannot declare an emergency,
-                    and nothing it writes is published without operator acceptance and approval by a second person. Provider: <span className="mono">{a.suggestions[0].provider}</span>
+                    and nothing it writes is published without operator acceptance and approval by a second person.
+                    <div className="mono" style={{ marginTop: 4 }}>provider: {a.suggestions[0].provider}</div>
                   </div>
                   {a.suggestions.map((s, i) => (
                     <div key={i} className="lang-col" style={{ background: '#fff' }}>

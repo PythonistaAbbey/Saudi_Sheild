@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Saudi Shield (Prototype)",
+    "slug": "saudi-shield-prototype",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F3F2EE",
+    "ios": { "supportsTablet": true, "bundleIdentifier": "org.example.saudishield.prototype" },
+    "android": { "package": "org.example.saudishield.prototype" },
+    "web": { "bundler": "metro", "output": "single" },
+    "extra": { "environment": "EXERCISE-ONLY" }
+  }
+}

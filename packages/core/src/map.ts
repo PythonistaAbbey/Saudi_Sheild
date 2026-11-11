@@ -27,3 +27,17 @@ export function makeProjection(width: number, bbox = KSA_BBOX, pad = 0.6): Proje
   const ringPath = (ring: [number, number][]) => ring.map((p, i) => `${i ? 'L' : 'M'}${project(p).join(',')}`).join('') + 'Z';
   return { width, height, project, ringPath, ringsPath: (rings) => rings.map(ringPath).join('') };
 }
+
+/** Bounding box around points, padded to at least `minSpan` degrees of longitude, aspect ~ phone card. */
+export function fitBbox(points: [number, number][], minSpan = 4) {
+  if (!points.length) return KSA_BBOX;
+  let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+  for (const [x, y] of points) {
+    minLon = Math.min(minLon, x); maxLon = Math.max(maxLon, x);
+    minLat = Math.min(minLat, y); maxLat = Math.max(maxLat, y);
+  }
+  const span = Math.max(minSpan, maxLon - minLon, (maxLat - minLat) * 1.4);
+  const cx = (minLon + maxLon) / 2;
+  const cy = (minLat + maxLat) / 2;
+  return { minLon: cx - span, maxLon: cx + span, minLat: cy - span * 0.62, maxLat: cy + span * 0.62 };
+}
