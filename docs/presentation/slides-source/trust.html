@@ -1,0 +1,18 @@
+<section id="trust" data-transition="fade" style="background:#0A2E22;color:#F6F5F1;font-family:'IBM Plex Sans Arabic', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:600;color:#8FC9AE;letter-spacing:2px;text-transform:uppercase">Trust and integrity</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.15;color:#F6F5F1">Fake or altered messages never reach the public</h2>
+<div style="display:flex;flex-direction:row;gap:56px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:30px;line-height:1.45;color:#D6EADF"><b style="color:#F6F5F1">Signed twice.</b> The issuer signs the message; the platform signs the public feed; the app checks both with a pinned key.</p>
+<p style="font-size:30px;line-height:1.45;color:#D6EADF"><b style="color:#F6F5F1">Quarantine, not silence.</b> Bad signatures, unknown or revoked keys and forbidden fields are held for review with a reason.</p>
+<p style="font-size:30px;line-height:1.45;color:#D6EADF"><b style="color:#F6F5F1">Tamper-evident log.</b> Each audit entry is hash-chained to the last, so an edited record breaks the chain.</p>
+<p style="font-size:30px;line-height:1.45;color:#D6EADF"><b style="color:#F6F5F1">Exercise only.</b> The prototype refuses any message not marked as an exercise.</p>
+</div>
+<figure style="display:flex;flex-direction:column;gap:12px">
+<img src="/_blob/407ae05506dd5fe1e005a222cba89c59" alt="Quarantined inbound messages" style="width:880px;height:550px;border-radius:20px;border:1px solid #1F4E3D;object-fit:cover">
+<figcaption style="font-size:24px;color:#8FB3A3">Inbound queue: tampered and unknown-key messages quarantined</figcaption>
+</figure>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8FB3A3">Ed25519 over canonical JSON · Demo keys only; production keys would live in an HSM</p>
+<aside>Run the integrity-failures scenario live if there is time: it sends a tampered message and one signed with an unregistered key. Both land in quarantine and nothing changes for the public.</aside>
+</section>
