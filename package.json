@@ -1,0 +1,11 @@
+{
+  "name": "saudi-shield",
+  "private": true,
+  "description": "Saudi Shield independent prototype. Fictional exercise data only. Not an official service.",
+  "scripts": {
+    "build:core": "pnpm --filter @saudi-shield/core build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck"
+  },
+  "packageManager": "pnpm@10.28.0"
+}
