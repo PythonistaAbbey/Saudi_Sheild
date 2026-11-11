@@ -1,0 +1,72 @@
+[
+  {
+    "page": "/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/prepare/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/plan/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/check/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/drill/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/numbers/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/about/",
+    "lang": "en",
+    "serious": []
+  },
+  {
+    "page": "/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/prepare/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/plan/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/check/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/drill/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/numbers/",
+    "lang": "ar",
+    "serious": []
+  },
+  {
+    "page": "/about/",
+    "lang": "ar",
+    "serious": []
+  }
+]

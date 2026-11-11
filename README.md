@@ -63,6 +63,24 @@ node scripts/demo-journey.cjs     # full UI journey + screenshots (servers above
 node scripts/a11y-check.cjs       # accessibility scan
 ```
 
+## Public website (`apps/web`)
+
+A free, bilingual preparedness site for everyone in the Kingdom. It is clearly independent, sends no live alerts and uses only fictional exercise data.
+
+- **Prepare**: before, during and after guidance for six hazards, printable.
+- **Family plan and go-bag**: safe rooms, meeting points and contacts on one printable card, plus a 14-item checklist. Saved only in the browser.
+- **Is it real?**: a five-question check for forwarded "alerts", and a live demo of how a signed message fails when altered.
+- **Try a drill**: runs the real `core` pipeline in the browser (signature check, preparer, a different approver, a third publisher, phone-side verification) and shows a forged message being quarantined.
+- **Numbers**: 911, 998, 997 and 999 with tap to call.
+- Arabic and English with right-to-left layout, larger text and high-contrast modes, offline support through a service worker, no accounts, analytics or location.
+
+```bash
+pnpm --filter @saudi-shield/core build
+pnpm --filter @saudi-shield/web build          # static export in apps/web/out
+python3 -m http.server 3100 -d apps/web/out    # or any static host
+pnpm web:check                                 # 11 browser checks + axe scan, screenshots in docs/screenshots/web
+```
+
 ## Milestones
 
 | Milestone | Status | Where |
