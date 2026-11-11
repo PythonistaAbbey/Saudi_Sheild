@@ -13,3 +13,4 @@ export * from './scenarios';
 export * from './platform';
 export * from './guidance';
 export * from './family';
+export * from './map';

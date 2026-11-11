@@ -88,19 +88,19 @@ function zone(code: string, cityCode: string, letter: string, r = 0.45): Warning
 }
 
 export const WARNING_AREAS: WarningArea[] = [
-  zone('EX-RIY-A', 'RIY-RIYADH', 'R1', 0.55),
-  zone('EX-RIY-B', 'RIY-KHARJ', 'R2'),
-  zone('EX-MKK-A', 'MKK-JEDDAH', 'M1'),
-  zone('EX-MKK-B', 'MKK-MAKKAH', 'M2', 0.35),
-  zone('EX-MKK-C', 'MKK-TAIF', 'M3', 0.35),
-  zone('EX-MDN-A', 'MDN-MADINAH', 'N1'),
-  zone('EX-EAS-A', 'EAS-DAMMAM', 'E1'),
-  zone('EX-EAS-B', 'EAS-AHSA', 'E2'),
-  zone('EX-QAS-A', 'QAS-BURAYDAH', 'Q1'),
-  zone('EX-TBK-A', 'TBK-TABUK', 'T1'),
-  zone('EX-ASR-A', 'ASR-ABHA', 'A1'),
-  zone('EX-JAZ-A', 'JAZ-JAZAN', 'J1'),
-  zone('EX-HAI-A', 'HAI-HAIL', 'H1'),
+  zone('EX-RIY-A', 'RIY-RIYADH', 'R1', 0.75),
+  zone('EX-RIY-B', 'RIY-KHARJ', 'R2', 0.38),
+  zone('EX-MKK-A', 'MKK-JEDDAH', 'M1', 0.42),
+  zone('EX-MKK-B', 'MKK-MAKKAH', 'M2', 0.26),
+  zone('EX-MKK-C', 'MKK-TAIF', 'M3', 0.3),
+  zone('EX-MDN-A', 'MDN-MADINAH', 'N1', 0.65),
+  zone('EX-EAS-A', 'EAS-DAMMAM', 'E1', 0.55),
+  zone('EX-EAS-B', 'EAS-AHSA', 'E2', 0.55),
+  zone('EX-QAS-A', 'QAS-BURAYDAH', 'Q1', 0.65),
+  zone('EX-TBK-A', 'TBK-TABUK', 'T1', 0.65),
+  zone('EX-ASR-A', 'ASR-ABHA', 'A1', 0.55),
+  zone('EX-JAZ-A', 'JAZ-JAZAN', 'J1', 0.45),
+  zone('EX-HAI-A', 'HAI-HAIL', 'H1', 0.65),
 ];
 
 export function areaByCode(code: string): WarningArea | undefined {
