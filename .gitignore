@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.next/
+.expo/
+web-build/
+*.log
+.env*
+!.env.example
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo

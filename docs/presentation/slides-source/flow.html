@@ -1,0 +1,37 @@
+<section id="flow" data-transition="fade" style="background:#F6F5F1;color:#1B1F22;font-family:'IBM Plex Sans Arabic', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43;letter-spacing:2px;text-transform:uppercase">How a warning flows</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.15">Nothing reaches the public without a signature and three people</h2>
+<div style="display:flex;flex-direction:row;gap:16px;align-items:stretch">
+<div style="flex:1;background:#0A2E22;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#8FC9AE">1 · Issuer</p>
+<p style="font-size:24px;color:#F6F5F1;line-height:1.4">Authorised authority signs a CAP-style message</p>
+</div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43">2 · Verify</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">Key and signature checked; failures quarantined</p>
+</div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43">3 · Operator</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">Prepares; reviews AI drafts and checks</p>
+</div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43">4 · Approver</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">A different person approves</p>
+</div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43">5 · Publisher</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">Duty officer publishes after confirmation</p>
+</div>
+<div style="flex:1;background:#0E5E43;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:600;color:#D6EADF">6 · App</p>
+<p style="font-size:24px;color:#F6F5F1;line-height:1.4">Verifies again with a pinned key, then shows it</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#FFFFFF;border:1px dashed #0E5E43;border-radius:20px;padding:28px 36px">
+<x-icon name="Lightning" style="color:#0E5E43;width:44px;height:44px"></x-icon>
+<p style="font-size:30px;color:#1B1F22;line-height:1.4"><b>In parallel and unchanged:</b> the official cell broadcast and sirens. Saudi Shield adds context, history, languages and accessibility after them.</p>
+</div>
+<p style="font-size:30px;color:#4A5157;line-height:1.4">Updates and the “White” all-clear follow the same path and must reference the original alert. Every step is written to a tamper-evident audit log.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#60676D">Architecture: docs/02-architecture.md · Demonstrated end to end in the simulator</p>
+<aside>Walk the chain left to right. The key point is separation of duties: the person who prepares cannot approve, and the publisher must be different again. Push notifications only wake the app; the content is always fetched and verified, so a spoofed notification cannot show a fake alert.</aside>
+</section>

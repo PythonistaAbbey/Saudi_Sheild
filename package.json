@@ -1,0 +1,17 @@
+{
+  "name": "saudi-shield",
+  "private": true,
+  "description": "Saudi Shield independent prototype. Fictional exercise data only. Not an official service.",
+  "scripts": {
+    "build:core": "pnpm --filter @saudi-shield/core build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "build": "pnpm --filter @saudi-shield/core build && pnpm --filter @saudi-shield/api build && pnpm --filter @saudi-shield/dashboard build && pnpm --filter @saudi-shield/mobile export:web",
+    "demo:journey": "node scripts/demo-journey.cjs",
+    "a11y": "node scripts/a11y-check.cjs"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "devDependencies": {
+    "axe-core": "4.10.3"
+  }
+}

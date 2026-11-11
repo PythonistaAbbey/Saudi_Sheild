@@ -1,0 +1,33 @@
+<section id="evidence" data-transition="fade" style="background:#F6F5F1;color:#1B1F22;font-family:'IBM Plex Sans Arabic', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<p style="font-size:24px;font-weight:600;color:#0E5E43;letter-spacing:2px;text-transform:uppercase">Evidence</p>
+<h2 style="font-size:64px;font-weight:600;line-height:1.15">Tested end to end, not just designed</h2>
+<div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:24px">
+<div style="background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:80px;font-weight:600;color:#0E5E43;line-height:1">31</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">core tests: signing, workflow, safety, templates</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:80px;font-weight:600;color:#0E5E43;line-height:1">15</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">API tests: roles, two-person rule, feeds</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:80px;font-weight:600;color:#0E5E43;line-height:1">17</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">steps in the browser journey, issuer to app</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:80px;font-weight:600;color:#0E5E43;line-height:1">0</p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">serious accessibility issues on 24 screens</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E4E2DC;border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:80px;font-weight:600;color:#0E5E43;line-height:1">1.2<span style="font-size:40px"> KB</span></p>
+<p style="font-size:24px;color:#4A5157;line-height:1.4">lite feed, gzipped, against 3.5 KB in full</p>
+</div>
+</div>
+<ul style="font-size:30px;line-height:1.5;color:#1B1F22">
+<li>Safe failure tested: bad signatures, lost network, expired alerts and revoked keys</li>
+<li>Privacy tested: check-ins hold no location and are deleted after 72 hours</li>
+<li>Every run in continuous integration; results and commands in docs/06-testing.md</li>
+</ul>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#60676D">Automated with Vitest, Supertest, Playwright and axe-core · November 2026</p>
+<aside>These numbers come from the automated suite, which anyone can re-run. The accessibility scan covers both apps in Arabic and English. What is not tested yet: real devices, real networks under load, and real users.</aside>
+</section>
