@@ -172,8 +172,8 @@ export class Platform {
     const successor = rec.supersededBy ? this.records.get(rec.supersededBy) : undefined;
     let publicState: PublicAlert['publicState'] = 'active';
     if (rec.state === 'CANCELLED') publicState = 'cancelled';
-    else if (rec.state === 'EXPIRED') publicState = 'expired';
     else if (rec.state === 'CLEARED' || rec.message.level === 'white') publicState = 'cleared';
+    else if (rec.state === 'EXPIRED') publicState = 'expired';
     else if (successor) publicState = 'superseded';
     const plain: PublicAlert['plain'] = {};
     for (const s of rec.suggestions) if (s.kind === 'plain_language' && s.accepted) plain[s.lang] = s.text;

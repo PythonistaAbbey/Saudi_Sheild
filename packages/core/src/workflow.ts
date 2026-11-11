@@ -4,6 +4,7 @@ import { KeyRegistry, sha256Hex, canonicalJson } from './crypto';
 import { can, type Actor, type Permission } from './rbac';
 import { findForbiddenFields } from './safety';
 import { renderAll } from './templates';
+import { HAZARDS, INSTRUCTIONS } from './i18n';
 import type { AlertRecord, AlertState, Finding, IssuerMessage, SignedEnvelope, VerificationResult } from './types';
 
 export class WorkflowError extends Error {
@@ -45,14 +46,20 @@ export function ingest(env: SignedEnvelope, registry: KeyRegistry, now: Date, ex
     quarantineReason = 'Replay: identifier already received from this issuer';
 
   const msg = env?.payload as IssuerMessage;
-  const safeMsg: IssuerMessage = quarantineReason && forbidden.length
-    ? // do not retain forbidden data, keep only harmless identifying fields
-      { identifier: String(msg?.identifier ?? ''), sender: String(msg?.sender ?? ''), sent: String(msg?.sent ?? now.toISOString()), status: 'Exercise', msgType: 'Alert', level: 'yellow', hazard: 'aerial_threat', areas: [], instructions: [], expires: now.toISOString() }
+  const wellFormed = isWellFormed(msg);
+  if (!quarantineReason && !wellFormed) {
+    quarantineReason = 'Malformed message';
+    verification = { ...verification, ok: false, code: 'MALFORMED' };
+  }
+  const discard = forbidden.length > 0 || !wellFormed;
+  const safeMsg: IssuerMessage = discard
+    ? // do not retain unsafe or unparseable data, keep only harmless identifying fields
+      { identifier: String(msg?.identifier ?? 'unknown'), sender: String(msg?.sender ?? 'unknown'), sent: String(msg?.sent ?? now.toISOString()), status: 'Exercise', msgType: 'Alert', level: 'yellow', hazard: 'aerial_threat', areas: [], instructions: [], expires: now.toISOString() }
     : msg;
 
   let texts;
   try {
-    if (forbidden.length) throw new Error('discarded');
+    if (discard) throw new Error('discarded');
     texts = renderAll(safeMsg);
   } catch {
     texts = { ar: { headline: '', body: '', steps: [] }, en: { headline: '', body: '', steps: [] } };
@@ -68,7 +75,7 @@ export function ingest(env: SignedEnvelope, registry: KeyRegistry, now: Date, ex
 
   const base: AlertRecord = {
     id,
-    envelope: forbidden.length ? { ...env, payload: safeMsg } : env,
+    envelope: discard ? { keyId: String(env?.keyId ?? ''), signature: String(env?.signature ?? ''), payload: safeMsg } : env,
     message: safeMsg,
     verification,
     state: 'RECEIVED',
@@ -170,4 +177,29 @@ export function expireIfDue(rec: AlertRecord, now: Date): AlertRecord {
     return { ...move(rec, 'EXPIRED', 'system:clock', now), closedAt: now.toISOString() };
   }
   return rec;
+}
+
+const LEVELS_OK = ['yellow', 'red', 'white'];
+const TYPES_OK = ['Alert', 'Update', 'Cancel'];
+function isWellFormed(m: unknown): m is IssuerMessage {
+  const x = m as IssuerMessage;
+  return (
+    !!x &&
+    typeof x === 'object' &&
+    typeof x.identifier === 'string' &&
+    typeof x.sender === 'string' &&
+    typeof x.sent === 'string' &&
+    !isNaN(Date.parse(x.sent)) &&
+    typeof x.expires === 'string' &&
+    !isNaN(Date.parse(x.expires)) &&
+    LEVELS_OK.includes(x.level) &&
+    TYPES_OK.includes(x.msgType) &&
+    typeof x.hazard === 'string' &&
+    Array.isArray(x.areas) &&
+    x.areas.every((a) => typeof a === 'string') &&
+    Array.isArray(x.instructions) &&
+    x.instructions.every((c) => typeof c === 'string' && c in INSTRUCTIONS) &&
+    x.hazard in HAZARDS &&
+    (x.references === undefined || Array.isArray(x.references))
+  );
 }
