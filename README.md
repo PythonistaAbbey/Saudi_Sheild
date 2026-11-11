@@ -81,6 +81,8 @@ python3 -m http.server 3100 -d apps/web/out    # or any static host
 pnpm web:check                                 # 11 browser checks + axe scan, screenshots in docs/screenshots/web
 ```
 
+Live site: **https://pythonistaabbey.github.io/Saudi_Sheild/**, deployed by `.github/workflows/pages.yml` on every push to `main` that touches the site (set `BASE_PATH` when hosting under a sub-path).
+
 ## Milestones
 
 | Milestone | Status | Where |

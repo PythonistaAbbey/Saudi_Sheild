@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: { default: 'Saudi Shield · Be ready before the alert', template: '%s · Saudi Shield' },
   description:
     'Independent, free preparedness companion for everyone in Saudi Arabia: hazard guides, a family emergency plan, a fake-alert checker and fictional drills, in Arabic and English. Not an official service.',
-  manifest: '/manifest.webmanifest',
-  icons: { icon: '/icon.svg' },
+  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/icon.svg` },
 };
 
 export const viewport: Viewport = { themeColor: '#0e5e43', width: 'device-width', initialScale: 1 };

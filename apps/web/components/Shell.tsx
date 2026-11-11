@@ -37,7 +37,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if ('serviceWorker' in navigator && location.hostname !== 'localhost' && location.protocol === 'https:') {
-      navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+      navigator.serviceWorker.register(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/sw.js`).catch(() => undefined);
     }
   }, []);
 
