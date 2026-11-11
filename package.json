@@ -8,7 +8,8 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "build": "pnpm --filter @saudi-shield/core build && pnpm --filter @saudi-shield/api build && pnpm --filter @saudi-shield/dashboard build && pnpm --filter @saudi-shield/mobile export:web",
     "demo:journey": "node scripts/demo-journey.cjs",
-    "a11y": "node scripts/a11y-check.cjs"
+    "a11y": "node scripts/a11y-check.cjs",
+    "web:check": "node scripts/web-check.cjs"
   },
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {

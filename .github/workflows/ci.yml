@@ -23,3 +23,5 @@ jobs:
       - run: pnpm --filter @saudi-shield/dashboard typecheck
       - run: pnpm --filter @saudi-shield/mobile typecheck
       - run: pnpm --filter @saudi-shield/dashboard build
+      - run: pnpm --filter @saudi-shield/web typecheck
+      - run: pnpm --filter @saudi-shield/web build
